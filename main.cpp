@@ -37,11 +37,31 @@ int main(int argc, char** argv) {
             im(roi).copyTo(patch);
 
             std::ostringstream stm;
-
+            // Normal patch
             stm << argv[5] << "/" << i << "_" << j << "_" << patch_width << "_" << patch_height;
             std::string fname = stm.str()+".png";
             std::cout << fname << std::endl;
-            imwrite(fname, patch, compression_params);
+            cv::imwrite(fname, patch, compression_params);
+            // 90 degrees
+            fname = stm.str()+"_90.png";
+            std::cout << fname << std::endl;
+            cv::transpose(patch, patch);  
+            cv::flip(patch, patch,1);
+            cv::imwrite(fname, patch, compression_params);
+
+            // 180 degrees
+            fname = stm.str()+"_180.png";
+            std::cout << fname << std::endl;
+            cv::transpose(patch, patch);  
+            cv::flip(patch, patch,1);
+            cv::imwrite(fname, patch, compression_params);
+
+            // 270 degrees
+            fname = stm.str()+"_270.png";
+            std::cout << fname << std::endl;
+            cv::transpose(patch, patch);  
+            cv::flip(patch, patch,1);
+            cv::imwrite(fname, patch, compression_params);
         }
     }
     
